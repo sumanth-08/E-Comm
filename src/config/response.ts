@@ -5,14 +5,18 @@ export const RESPONSE = {
   },
   UNKNOWN: {
     code: 500,
-    message: "Something went wrong, try again"
+    message: "Something went wrong, try again",
   },
   ALREADY_EXIST: {
     code: 201,
-    message: "is aleady exist"
+    message: "is aleady exist",
   },
   VALIDATOR: {
     code: 202,
-    message: ""
-  }
+    message: "",
+  },
+  NOT_FOUND: {
+    code: 203,
+    message: "data not found",
+  },
 };
