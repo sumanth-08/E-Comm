@@ -19,4 +19,16 @@ export const RESPONSE = {
     code: 203,
     message: "data not found",
   },
+  ACCESS_DENIED: {
+    code: 400,
+    message: "Access denied. Unauthorized user",
+  },
+  INVALID_TOKEN: {
+    code: 401,
+    message: "Invalid token",
+  },
+  FORBIDDEN: {
+    code: 403,
+    message: "Forbidden! you are not allowed to access",
+  },
 };
