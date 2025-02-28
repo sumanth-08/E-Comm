@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 
 let connection: Sequelize | null = null;
 
-export const getDBConnection = () => {
+export const getDBConnection = async () => {
   if (!connection) {
     connection = new Sequelize({
       database: process.env.DBNAME,
@@ -23,7 +23,7 @@ export const getDBConnection = () => {
     connection
       .authenticate()
       .then(() => {
-        console.log("Database connection Suuccefull");
+        console.log("Database connection Successful");
       })
       .catch((err) => {
         console.log("Failed to database connect", err);
