@@ -70,12 +70,28 @@ export const listCategory = async () => {
         is_active: STATE.ACTIVE,
       },
       attributes: ["category_id", "name", "description"],
-      order: [["name", "ASC"]]
+      order: [["name", "ASC"]],
     });
 
     return setResponseMsg(RESPONSE.SUCCESS, "", { data });
     // return data;
   } catch (err) {
-    throw new Error("Failed to create category");
+    throw new Error("Failed to list category");
+  }
+};
+
+export const categoryFindById = async (id: string) => {
+  try {
+    const categoryModel = await initCategoryModel();
+
+    let data = await categoryModel.findOne({
+      where: {
+        category_id: id,
+      },
+    });
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to find by id category");
   }
 };
