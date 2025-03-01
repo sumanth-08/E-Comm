@@ -6,6 +6,9 @@ import updateCategory from "./src/controllers/category/updateCategory";
 import deleteCategory from "./src/controllers/category/deleteCategory";
 import listCategory from "./src/controllers/category/listCategory";
 import addProduct from "./src/controllers/products/addProduct";
+import listProduct from "./src/controllers/products/listProduct";
+import updateProduct from "./src/controllers/products/updateProduct";
+import deleteProduct from "./src/controllers/products/deleteProduct";
 
 const routes = (app: express.Application) => {
   app.use(express.json());
@@ -21,6 +24,9 @@ const routes = (app: express.Application) => {
 
   // products
   app.use("/api/product/add", addProduct);
+  app.use("/api/product/list", listProduct);
+  app.use("/api/product/update", updateProduct);
+  app.use("/api/product/delete", deleteProduct);
 };
 
 export default routes;
