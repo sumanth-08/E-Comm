@@ -3,10 +3,11 @@ import { Response } from "express";
 interface ResponseData {
   code: number;
   message: string;
+  data?: object;
 }
 
-export const send = (res: Response, responseData: ResponseData, data: object = {}): Response => {
-  const { code, message } = responseData;
+export const send = (res: Response, responseData: ResponseData): Response => {
+  const { code, message, data } = responseData;
   res.set({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": true,
@@ -20,9 +21,10 @@ export const send = (res: Response, responseData: ResponseData, data: object = {
   });
 };
 
-export const setResponseMsg = (res: ResponseData, parameter?: string): ResponseData => {
+export const setResponseMsg = (res: ResponseData, parameter?: string, data: object = {}): ResponseData => {
   return {
     code: res.code,
     message: `${parameter ?? ""} ${res.message}`.trim(),
+    data: data
   };
 };
