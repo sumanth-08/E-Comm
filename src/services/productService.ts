@@ -3,14 +3,14 @@ import initProductModel from "../models/productModel";
 import { setResponseMsg } from "../utils/responseUtil";
 import { categoryFindById } from "./categoryService";
 
-export const addProduct = async (name: string, description: string, price: number, stock: number, categoryId: string) => {
+export const addProduct = async (name: string, description: string, price: number, stock: number, categoryId: string, imageUrl?: string) => {
   try {
     const productModel = await initProductModel();
 
     const isCatExist = await categoryFindById(categoryId);
     // console.log(isCatExist);
     if (!isCatExist) {
-        return setResponseMsg(RESPONSE.NOT_FOUND, "Category")
+      return setResponseMsg(RESPONSE.NOT_FOUND, "Category");
     }
 
     await productModel.create({
@@ -19,6 +19,7 @@ export const addProduct = async (name: string, description: string, price: numbe
       price,
       stock,
       categoryId,
+      imageUrl,
     });
 
     return setResponseMsg(RESPONSE.SUCCESS);

@@ -19,6 +19,10 @@ export const RESPONSE = {
     code: 203,
     message: "data not found",
   },
+  MULTER_ERR: {
+    code: 204,
+    message: "",
+  },
   ACCESS_DENIED: {
     code: 400,
     message: "Access denied. Unauthorized user",
