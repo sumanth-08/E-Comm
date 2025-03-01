@@ -38,7 +38,8 @@ const initAccountModel = async () => {
     await Account.sync({ alter: true });
     return Account;
   } catch (err) {
-    console.log("account model", err);
+    // console.log("account model", err);
+    throw new Error("Failed to create account model");
   }
 };
 

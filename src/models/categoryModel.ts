@@ -34,7 +34,8 @@ const initCategoryModel = async () => {
     await Category.sync({ alter: true });
     return Category;
   } catch (err) {
-    console.log("Category model", err);
+    // console.log("Category model", err);
+    throw new Error("Failed to to create category model");
   }
 };
 
