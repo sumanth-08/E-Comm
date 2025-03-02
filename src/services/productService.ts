@@ -69,11 +69,6 @@ export const updateProduct = async (id: string, name: string, description: strin
   try {
     const productModel = await initProductModel();
 
-    const isCatExist = await categoryFindById(categoryId);
-    if (!isCatExist) {
-      return setResponseMsg(RESPONSE.NOT_FOUND, "Category");
-    }
-
     await productModel.update(
       {
         name,
