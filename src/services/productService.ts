@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { STATE } from "../config/constants";
 import { RESPONSE } from "../config/response";
 import initCategoryModel from "../models/categoryModel";
@@ -30,10 +31,24 @@ export const addProduct = async (name: string, description: string, price: numbe
   }
 };
 
-export const listProduct = async () => {
+export const listProduct = async (page: number, limit: number, price_range: {}, search?: string, category?: any) => {
   try {
     const productModel = await initProductModel();
     const categoryModel = await initCategoryModel();
+
+    let query: any = {};
+    query.is_active = STATE.ACTIVE;
+
+    // console.log(price_range);
+    // price range filter
+    if (price_range) query.price = { [Op.or]: price_range };
+
+    // serch by product name
+    if (search) query.name = { [Op.iLike]: "%" + search + "%" };
+
+    // category filter
+    // console.log("x",category);
+    if (category) query.categoryId = category.category_id
 
     let data = await productModel.findAll({
       include: [
@@ -43,12 +58,15 @@ export const listProduct = async () => {
           attributes: ["category_id", "name", "description"],
         },
       ],
-      where: { is_active: STATE.ACTIVE },
+      where: query,
       attributes: ["product_id", "name", "description", "price", "stock", "imageUrl"],
+      offset: (page - 1) * limit,
+      limit: limit,
     });
 
     return setResponseMsg(RESPONSE.SUCCESS, "", data);
   } catch (err) {
+    console.log(err);
     throw new Error("Failed to list product");
   }
 };

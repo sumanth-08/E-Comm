@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { STATE } from "../config/constants";
 import { RESPONSE } from "../config/response";
 import initCategoryModel from "../models/categoryModel";
@@ -87,6 +88,22 @@ export const categoryFindById = async (id: string) => {
     let data = await categoryModel.findOne({
       where: {
         category_id: id,
+      },
+    });
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to find by id category");
+  }
+};
+
+export const categoryFindByName = async (name: string) => {
+  try {
+    const categoryModel = await initCategoryModel();
+
+    let data = await categoryModel.findOne({
+      where: {
+        name: name,
       },
     });
 
