@@ -10,12 +10,6 @@ export const addProduct = async (name: string, description: string, price: numbe
   try {
     const productModel = await initProductModel();
 
-    const isCatExist = await categoryFindById(categoryId);
-    // console.log(isCatExist);
-    if (!isCatExist) {
-      return setResponseMsg(RESPONSE.NOT_FOUND, "Category");
-    }
-
     await productModel.create({
       name,
       description,
@@ -48,7 +42,7 @@ export const listProduct = async (page: number, limit: number, price_range: {}, 
 
     // category filter
     // console.log("x",category);
-    if (category) query.categoryId = category.category_id
+    if (category) query.categoryId = category.category_id;
 
     let data = await productModel.findAll({
       include: [
@@ -117,6 +111,22 @@ export const deleteProduct = async (id: string) => {
     );
 
     return setResponseMsg(RESPONSE.SUCCESS);
+  } catch (err) {
+    throw new Error("Failed to delete product");
+  }
+};
+
+export const getProductData = async (id: string) => {
+  try {
+    const productModel = await initProductModel();
+
+    let data = await productModel.findOne({
+      where: {
+        product_id: id,
+      },
+    });
+
+    return data;
   } catch (err) {
     throw new Error("Failed to delete product");
   }

@@ -9,6 +9,9 @@ import addProduct from "./src/controllers/products/addProduct";
 import listProduct from "./src/controllers/products/listProduct";
 import updateProduct from "./src/controllers/products/updateProduct";
 import deleteProduct from "./src/controllers/products/deleteProduct";
+import addToCart from "./src/controllers/cart/addToCart";
+import lsitMyCartItem from "./src/controllers/cart/lsitMyCartItem";
+import removeItemCart from "./src/controllers/cart/removeItemCart";
 
 const routes = (app: express.Application) => {
   app.use(express.json());
@@ -27,6 +30,11 @@ const routes = (app: express.Application) => {
   app.use("/api/product/list", listProduct);
   app.use("/api/product/update", updateProduct);
   app.use("/api/product/delete", deleteProduct);
+
+  // cart
+  app.use("/api/cart/add", addToCart);
+  app.use("/api/cart/list", lsitMyCartItem);
+  app.use("/api/cart/remove", removeItemCart);
 };
 
 export default routes;

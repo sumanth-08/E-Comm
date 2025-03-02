@@ -21,3 +21,8 @@ export const validateProductInput = [
   body("stock").notEmpty().withMessage("Stock is required").isInt({ min: 0, max: 1 }).withMessage("Stcok must be 0 or 1"),
   body("categoryId").notEmpty().withMessage("Category id is required"),
 ];
+
+export const validateCartInput = [
+  body("productId").notEmpty().withMessage("Product id is required"),
+  body("quantity").notEmpty().withMessage("Quantity is required").isInt({ min: 1 }).withMessage("Quantity must be positive number"),
+];
