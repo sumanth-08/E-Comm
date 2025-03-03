@@ -39,8 +39,8 @@ export default router.post("/", authenticate, isAdminAccess, upload, validatePro
     // console.log(fileData);
     const imageUrl = fileData?.secure_url || null;
 
-    let response = await addProduct(name, description, price, stock, categoryId, imageUrl);
-    return send(res, response);
+    await addProduct(name, description, price, stock, categoryId, imageUrl);
+    return send(res, RESPONSE.SUCCESS);
   } catch (err) {
     console.log(err);
     return send(res, RESPONSE.UNKNOWN);

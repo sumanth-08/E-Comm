@@ -1,16 +1,13 @@
 import { Op } from "sequelize";
 import { STATE } from "../config/constants";
-import { RESPONSE } from "../config/response";
 import initCategoryModel from "../models/categoryModel";
 import initProductModel from "../models/productModel";
-import { setResponseMsg } from "../utils/responseUtil";
-import { categoryFindById } from "./categoryService";
 
 export const addProduct = async (name: string, description: string, price: number, stock: number, categoryId: string, imageUrl?: string) => {
   try {
     const productModel = await initProductModel();
 
-    await productModel.create({
+    let data = await productModel.create({
       name,
       description,
       price,
@@ -19,7 +16,7 @@ export const addProduct = async (name: string, description: string, price: numbe
       imageUrl,
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to add product");
   }
@@ -58,7 +55,7 @@ export const listProduct = async (page: number, limit: number, price_range: {}, 
       limit: limit,
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS, "", data);
+    return data;
   } catch (err) {
     console.log(err);
     throw new Error("Failed to list product");
@@ -69,7 +66,7 @@ export const updateProduct = async (id: string, name: string, description: strin
   try {
     const productModel = await initProductModel();
 
-    await productModel.update(
+    let data = await productModel.update(
       {
         name,
         description,
@@ -84,7 +81,7 @@ export const updateProduct = async (id: string, name: string, description: strin
       }
     );
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to update product");
   }
@@ -94,7 +91,7 @@ export const deleteProduct = async (id: string) => {
   try {
     const productModel = await initProductModel();
 
-    await productModel.update(
+    let data = await productModel.update(
       {
         is_active: STATE.INACTIVE,
       },
@@ -105,7 +102,7 @@ export const deleteProduct = async (id: string) => {
       }
     );
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to delete product");
   }

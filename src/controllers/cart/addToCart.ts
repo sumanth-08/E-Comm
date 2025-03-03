@@ -29,8 +29,8 @@ export default router.post("/", authenticate, validateCartInput, async (req: Req
       return send(res, setResponseMsg(RESPONSE.ALREADY_EXIST, "Product in cart"));
     }
 
-    let response = await addToCart(quantity, price, productId, userId);
-    return send(res, response);
+    await addToCart(quantity, price, productId, userId);
+    return send(res, RESPONSE.SUCCESS);
   } catch (err) {
     return send(res, RESPONSE.UNKNOWN);
   }

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { send, setResponseMsg } from "../../utils/responseUtil";
+import { send } from "../../utils/responseUtil";
 import { RESPONSE } from "../../config/response";
 import { authenticate } from "../../middlewares/authenticate";
 import { isAdminAccess } from "../../middlewares/validateAccess";
@@ -11,8 +11,8 @@ export default router.delete("/:id", authenticate, isAdminAccess, async (req: Re
   try {
     const product_id = req.params.id;
 
-    let response = await deleteProduct(product_id);
-    return send(res, response);
+    await deleteProduct(product_id);
+    return send(res, RESPONSE.SUCCESS);
   } catch (err) {
     console.log(err);
     return send(res, RESPONSE.UNKNOWN);

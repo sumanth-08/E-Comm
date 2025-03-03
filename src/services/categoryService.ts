@@ -1,19 +1,16 @@
-import { Op } from "sequelize";
 import { STATE } from "../config/constants";
-import { RESPONSE } from "../config/response";
 import initCategoryModel from "../models/categoryModel";
-import { setResponseMsg } from "../utils/responseUtil";
 
 export const createCategory = async (name: string, description: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    await categoryModel.create({
+    let data = await categoryModel.create({
       name,
       description,
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to create category");
   }
@@ -23,7 +20,7 @@ export const updateCategory = async (name: string, description: string, id: stri
   try {
     const categoryModel = await initCategoryModel();
 
-    await categoryModel.update(
+    let data = await categoryModel.update(
       {
         name,
         description,
@@ -35,7 +32,7 @@ export const updateCategory = async (name: string, description: string, id: stri
       }
     );
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to create category");
   }
@@ -45,7 +42,7 @@ export const deleteCategory = async (id: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    await categoryModel.update(
+    let data = await categoryModel.update(
       {
         is_active: STATE.INACTIVE,
       },
@@ -56,7 +53,7 @@ export const deleteCategory = async (id: string) => {
       }
     );
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to create category");
   }
@@ -74,7 +71,7 @@ export const listCategory = async () => {
       order: [["name", "ASC"]],
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS, "", { data });
+    return data;
     // return data;
   } catch (err) {
     throw new Error("Failed to list category");

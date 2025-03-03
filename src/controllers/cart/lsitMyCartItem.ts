@@ -9,8 +9,8 @@ export default router.get("/", authenticate, async (req: Request, res: Response)
   try {
     const userId = (req as any).user?.userid;
 
-    let response = await listMyCartItem(userId);
-    return send(res, response);
+    let data = await listMyCartItem(userId);
+    return send(res, RESPONSE.SUCCESS, data);
   } catch (err) {
     return send(res, RESPONSE.UNKNOWN);
   }

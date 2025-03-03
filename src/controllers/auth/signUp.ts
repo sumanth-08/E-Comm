@@ -1,5 +1,4 @@
 import { Request, Response, Router } from "express";
-import initAccountModel from "../../models/accountModel";
 import { signUp } from "../../services/authService";
 import { send, setResponseMsg } from "../../utils/responseUtil";
 import { RESPONSE } from "../../config/response";
@@ -29,9 +28,9 @@ export default router.post("/", validateUserData, async (req: Request, res: Resp
 
     const encryptedPass = await hashPassword(password);
 
-    let response = await signUp(email, encryptedPass);
+    await signUp(email, encryptedPass);
 
-    return send(res, response);
+    return send(res, RESPONSE.SUCCESS);
   } catch (err) {
     // console.log(err);
     return send(res, RESPONSE.UNKNOWN);

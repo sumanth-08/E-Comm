@@ -18,8 +18,8 @@ export default router.post("/", authenticate, isAdminAccess, validateCategoryInp
       return send(res, setResponseMsg(RESPONSE.VALIDATOR, inputError.array()[0].msg));
     }
 
-    let response = await createCategory(name, description);
-    return send(res, response);
+    await createCategory(name, description);
+    return send(res, RESPONSE.SUCCESS);
   } catch (err) {
     return send(res, RESPONSE.UNKNOWN);
   }

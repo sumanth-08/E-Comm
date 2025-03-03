@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { send, setResponseMsg } from "../../utils/responseUtil";
+import { send } from "../../utils/responseUtil";
 import { RESPONSE } from "../../config/response";
 import { authenticate } from "../../middlewares/authenticate";
 import { listProduct } from "../../services/productService";
@@ -41,10 +41,10 @@ export default router.get("/", authenticate, async (req: Request, res: Response)
     if (category) {
       catObj = await categoryFindByName(category);
       // console.log("c", catObj);
-    } 
+    }
 
-    let response = await listProduct(page, limit, priceCondition, search, catObj);
-    return send(res, response);
+    let data = await listProduct(page, limit, priceCondition, search, catObj);
+    return send(res, RESPONSE.SUCCESS, data);
   } catch (err) {
     console.log(err);
     return send(res, RESPONSE.UNKNOWN);

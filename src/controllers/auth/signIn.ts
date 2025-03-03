@@ -30,7 +30,6 @@ export default router.post("/", validateUserData, async (req: Request, res: Resp
     } else {
       return send(res, setResponseMsg(RESPONSE.NOT_FOUND, "User"));
     }
-
   } catch (err) {
     console.log(err);
     return send(res, RESPONSE.UNKNOWN);

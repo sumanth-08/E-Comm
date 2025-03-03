@@ -1,20 +1,18 @@
-import { RESPONSE } from "../config/response";
 import initCartModel from "../models/cartModel";
 import initProductModel from "../models/productModel";
-import { send, setResponseMsg } from "../utils/responseUtil";
 
 export const addToCart = async (quantity: number, price: number, productId: string, userId: string) => {
   try {
     const cartModel = await initCartModel();
 
-    await cartModel.create({
+    let data = await cartModel.create({
       quantity,
       price,
       productId,
       userId,
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to add item to cart");
   }
@@ -56,7 +54,7 @@ export const listMyCartItem = async (userId: string) => {
       attributes: ["cart_id", "quantity", "price", "productId", "userId"],
     });
 
-    return setResponseMsg(RESPONSE.SUCCESS, "", data);
+    return data;
   } catch (err) {
     throw new Error("Failed to list cart");
   }
@@ -66,9 +64,9 @@ export const removeFromCart = async (id: string) => {
   try {
     const cartModel = await initCartModel();
 
-    await cartModel.destroy({ where: { cart_id: id } });
+    let data = await cartModel.destroy({ where: { cart_id: id } });
 
-    return setResponseMsg(RESPONSE.SUCCESS);
+    return data;
   } catch (err) {
     throw new Error("Failed to remove item from cart");
   }
