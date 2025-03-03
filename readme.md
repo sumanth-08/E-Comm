@@ -56,3 +56,6 @@ UPDATE accounts SET role=1 WHERE email='<your-email-id>';
 
 ### Issues
 Create any issues [here](https://github.com/sumanth-08/E-Comm/issues)
+
+
+*note - Swagger API Docs and Automate test will implement shortly
