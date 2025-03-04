@@ -13,3 +13,8 @@ export enum STOCK {
   IS_STOCK = 1,
 }
 
+export enum PAYMENT_TYPE {
+  ONLINE = 1,
+  COD = 2,
+}
+

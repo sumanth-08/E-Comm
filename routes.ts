@@ -12,6 +12,8 @@ import deleteProduct from "./src/controllers/products/deleteProduct";
 import addToCart from "./src/controllers/cart/addToCart";
 import lsitMyCartItem from "./src/controllers/cart/lsitMyCartItem";
 import removeItemCart from "./src/controllers/cart/removeItemCart";
+import placeOrder from "./src/controllers/orders/placeOrder";
+import orderHistory from "./src/controllers/orders/orderHistory";
 
 const routes = (app: express.Application) => {
   app.use(express.json());
@@ -35,6 +37,10 @@ const routes = (app: express.Application) => {
   app.use("/api/cart/add", addToCart);
   app.use("/api/cart/list", lsitMyCartItem);
   app.use("/api/cart/remove", removeItemCart);
+
+  // orders
+  app.use("/api/orders/place", placeOrder);
+  app.use("/api/orders/history", orderHistory);
 };
 
 export default routes;

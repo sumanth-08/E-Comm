@@ -26,3 +26,8 @@ export const validateCartInput = [
   body("productId").notEmpty().withMessage("Product id is required"),
   body("quantity").notEmpty().withMessage("Quantity is required").isInt({ min: 1 }).withMessage("Quantity must be positive number"),
 ];
+
+
+export const validateOrderInput = [
+  body("payment_type").notEmpty().isInt({ min: 1, max: 2 }).withMessage("payment type is 1 (online) or 2 (cod)"),
+];
