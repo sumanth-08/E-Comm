@@ -44,7 +44,7 @@ GRANT ALL PRIVILEGES ON DATABASE "<databasename>" to <username>;
 ALTER USER <username> WITH SUPERUSER;
 ```
 
-6. Run `node index.ts` or `npx nodemon` in the root directory to start.
+6. Run `npm run dev` or `npx nodemon` in the root directory to start.
 
 7. Register the user with  `/api/auth/signup` endpoint.
 
@@ -54,8 +54,12 @@ This will create the user with role by default as user (role = 2) and if you wan
 UPDATE accounts SET role=1 WHERE email='<your-email-id>';
 ```
 
+### Swagger API Documnet
+- Run the following URL by replacing the `server-port` of server in the browser to get access the Swagger UI
+```
+http://localhost:<server-port>>/api-docs
+```
+
 ### Issues
 Create any issues [here](https://github.com/sumanth-08/E-Comm/issues)
 
-
-*note - Swagger API Docs and Automate test will implement shortly
