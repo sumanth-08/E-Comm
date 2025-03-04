@@ -42,6 +42,7 @@ export const ordersHistory = async (userId: string) => {
 
     let data = await orderMaster.findAll({
       where: { is_active: STATE.ACTIVE, userId: userId },
+      attributes: ["order_id", "total_amt", "payment_type", "createdAt"]
     });
 
     return data;

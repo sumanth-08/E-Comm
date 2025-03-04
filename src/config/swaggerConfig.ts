@@ -99,7 +99,7 @@ const swaggerDocs = {
         security: [{ BearerAuth: [] }],
         responses: {
           200: {
-            description: "List of products retrieved successfully",
+            description: "Everything worked as expected",
             content: {
               "application/json": {
                 schema: {
@@ -218,7 +218,7 @@ const swaggerDocs = {
           },
         },
         responses: {
-          200: { description: "Product added successfully" },
+          200: { description: "Everything worked as expected" },
           202: { description: "Validation error" },
           203: { description: "Category not found" },
           500: { description: "Something went wrong, try again" },
@@ -268,7 +268,7 @@ const swaggerDocs = {
         ],
         responses: {
           200: {
-            description: "List of products retrieved successfully",
+            description: "Everything worked as expected",
             content: {
               "application/json": {
                 schema: {
@@ -410,7 +410,7 @@ const swaggerDocs = {
         security: [{ BearerAuth: [] }],
         responses: {
           200: {
-            description: "Cart item retrieved successfully",
+            description: "Everything worked as expected",
             content: {
               "application/json": {
                 schema: {
@@ -436,7 +436,7 @@ const swaggerDocs = {
                               name: { type: "string", example: "Electronics" },
                               description: { type: "string", example: "Updated category for electronic products" },
                               price: { type: "number", example: 1200.99 },
-                              stock: { type: "integer", example: 5 },
+                              stock: { type: "integer", example: 1 },
                               imageUrl: { type: "string", nullable: true, example: null },
                             },
                           },
@@ -472,6 +472,72 @@ const swaggerDocs = {
         ],
         responses: {
           200: { description: "Everything worked as expected" },
+          500: { description: "Something went wrong, try again" },
+        },
+      },
+    },
+
+    "/api/orders/place": {
+      post: {
+        summary: "Place an order",
+        tags: ["Orders"],
+        security: [{ BearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/x-www-form-urlencoded": {
+              schema: {
+                type: "object",
+                properties: {
+                  payment_type: { type: "integer", example: 1 },
+                },
+                required: ["payment_type"],
+              },
+            },
+          },
+        },
+        responses: {
+          200: { description: "Everything worked as expected" },
+          202: { description: "Validation error" },
+          203: { description: "Cart data not found" },
+          500: { description: "Something went wrong, try again" },
+        },
+      },
+    },
+
+    "/api/orders/history": {
+      get: {
+        summary: "Order history",
+        tags: ["Orders"],
+        security: [{ BearerAuth: [] }],
+        responses: {
+          200: {
+            description: "Everything worked as expected",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    responseCode: { type: "integer", example: 200 },
+                    responseMessage: { type: "string", example: "Everything worked as expected" },
+                    responseData: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          order_id: { type: "string", example: "ebd0e2ce-e52b-413d-8895-538ed820078d" },
+                          total_amt: { type: "integer", example: "1200.99" },
+                          payment_type: { type: "string", example: "online" },
+                          createdAt: { type: "string", example: "2025-03-04T10:31:44.131Z" },
+                          order_date: { type: "string", example: "Mar 4, 2025" },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
           500: { description: "Something went wrong, try again" },
         },
       },
