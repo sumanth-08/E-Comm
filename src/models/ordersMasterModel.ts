@@ -5,10 +5,12 @@ import initProductModel from "./productModel";
 import initAccountModel from "./accountModel";
 import initOrdersItemModel from "./ordersItemModel";
 
+let OrderMaster: any | null = null;
 const initOrdersMasterModel = async () => {
   try {
+    if (OrderMaster) return OrderMaster;
     const sequelize = await getDBConnection();
-    const OrderMaster = sequelize.define(
+    OrderMaster = sequelize.define(
       "ordersmaster",
       {
         order_id: {

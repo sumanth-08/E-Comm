@@ -530,6 +530,27 @@ const swaggerDocs = {
                           payment_type: { type: "string", example: "online" },
                           createdAt: { type: "string", example: "2025-03-04T10:31:44.131Z" },
                           order_date: { type: "string", example: "Mar 4, 2025" },
+                          orderItemInfo: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                order_item_id: { type: "string", example: "98653b11-c6e7-4f38-a47c-d2109f788674" },
+                                cart_amt: { type: "number", example: 199 },
+                                productId: { type: "string", example: "98653b11-c6e7-4f38-a47c-d2109f788674" },
+                                orderId: { type: "string", example: "98653b11-c6e7-4f38-a47c-d2109f788674" },
+                                productInfo: {
+                                  type: "object",
+                                  properties: {
+                                    product_id: { type: "string", example: "98653b11-c6e7-4f38-a47c-d2109f788674" },
+                                    name: { type: "string", example: "Laptop" },
+                                    description: { type: "string", example: "This is powerfull gaming lap" },
+                                    imageUrl: { type: "string", example: "https://res.cloudinary.com/dmpog101w/image/upload/v1740937226/product/g0ppx2ouwdfyhufh53s1.jpg" },
+                                  },
+                                },
+                              },
+                            },
+                          },
                         },
                       },
                     },

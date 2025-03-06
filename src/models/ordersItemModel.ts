@@ -5,12 +5,14 @@ import initProductModel from "./productModel";
 import initAccountModel from "./accountModel";
 import initOrdersMasterModel from "./ordersMasterModel";
 
+let OrderItem: any | null = null;
 const initOrdersItemModel = async () => {
   try {
+    if (OrderItem) return OrderItem;
     const sequelize = await getDBConnection();
-    const OrderMaster = await initOrdersMasterModel();
     const ProductModel = await initProductModel();
-    const OrderItem = sequelize.define(
+    const OrderMaster = await initOrdersMasterModel();
+    OrderItem = sequelize.define(
       "ordersitem",
       {
         order_item_id: {
@@ -50,10 +52,10 @@ const initOrdersItemModel = async () => {
       onDelete: "CASCADE",
     });
     OrderMaster.hasMany(OrderItem, {
-        as: "orderItemInfo",
-        foreignKey: "orderId",
-        sourceKey: "order_id",
-        onDelete: "CASCADE",
+      as: "orderItemInfo",
+      foreignKey: "orderId",
+      sourceKey: "order_id",
+      onDelete: "CASCADE",
     });
     OrderItem.belongsTo(ProductModel, {
       as: "productInfo",
