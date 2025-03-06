@@ -7,7 +7,7 @@ export const addProduct = async (name: string, description: string, price: numbe
   try {
     const productModel = await initProductModel();
 
-    let data = await productModel.create({
+    const data = await productModel.create({
       name,
       description,
       price,
@@ -27,7 +27,7 @@ export const listProduct = async (page: number, limit: number, price_range: {}, 
     const productModel = await initProductModel();
     const categoryModel = await initCategoryModel();
 
-    let query: any = {};
+    const query: any = {};
     query.is_active = STATE.ACTIVE;
 
     // console.log(price_range);
@@ -41,7 +41,7 @@ export const listProduct = async (page: number, limit: number, price_range: {}, 
     // console.log("x",category);
     if (category) query.categoryId = category.category_id;
 
-    let data = await productModel.findAll({
+    const data = await productModel.findAll({
       include: [
         {
           model: categoryModel,
@@ -66,7 +66,7 @@ export const updateProduct = async (id: string, name: string, description: strin
   try {
     const productModel = await initProductModel();
 
-    let data = await productModel.update(
+    const data = await productModel.update(
       {
         name,
         description,
@@ -91,7 +91,7 @@ export const deleteProduct = async (id: string) => {
   try {
     const productModel = await initProductModel();
 
-    let data = await productModel.update(
+    const data = await productModel.update(
       {
         is_active: STATE.INACTIVE,
       },
@@ -112,7 +112,7 @@ export const getProductData = async (id: string) => {
   try {
     const productModel = await initProductModel();
 
-    let data = await productModel.findOne({
+    const data = await productModel.findOne({
       where: {
         product_id: id,
       },

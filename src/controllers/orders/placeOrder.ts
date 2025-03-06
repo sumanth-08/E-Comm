@@ -19,19 +19,19 @@ export default router.post("/", authenticate, validateOrderInput, async (req: Re
       return send(res, setResponseMsg(RESPONSE.VALIDATOR, inputError.array()[0].msg));
     }
 
-    let cartData: any = await listMyCartItem(userId);
+    const cartData: any = await listMyCartItem(userId);
     // console.log(cartData);
 
     if (!cartData.length) {
         return send(res, setResponseMsg(RESPONSE.NOT_FOUND, "Cart"))
     }
 
-    let cartAmt = cartData.map((itm: any) => itm.price * itm.quantity);
+    const cartAmt = cartData.map((itm: any) => itm.price * itm.quantity);
     // console.log(cartAmt);
-    let totalPayAmt = cartAmt.reduce((prev: number, cur: number) => prev + cur);
+    const totalPayAmt = cartAmt.reduce((prev: number, cur: number) => prev + cur);
     // console.log(totalPayAmt);
 
-    let orderData: any = await placeOrder(totalPayAmt, payment_type, userId);
+    const orderData: any = await placeOrder(totalPayAmt, payment_type, userId);
     // console.log(orderData.order_id);
 
     for (let i = 0; i < cartData.length; i++) {

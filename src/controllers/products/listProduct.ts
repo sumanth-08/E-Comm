@@ -10,12 +10,12 @@ const router = Router();
 export default router.get("/", authenticate, async (req: Request, res: Response): Promise<any> => {
   try {
     // paginaation
-    let page: number = Number(req.query.page) || 1;
-    let limit: number = Number(req.query.limit) || 10;
+    const page: number = Number(req.query.page) || 1;
+    const limit: number = Number(req.query.limit) || 10;
 
     let price_range = req.query.price_range;
-    let search: any = req.query.search;
-    let category: any = req.query.category;
+    const search: any = req.query.search;
+    const category: any = req.query.category;
 
     // price ranbge filter
     let splitedRange: { min: number; max: number }[] = [];
@@ -43,7 +43,7 @@ export default router.get("/", authenticate, async (req: Request, res: Response)
       // console.log("c", catObj);
     }
 
-    let data = await listProduct(page, limit, priceCondition, search, catObj);
+    const data = await listProduct(page, limit, priceCondition, search, catObj);
     return send(res, RESPONSE.SUCCESS, data);
   } catch (err) {
     console.log(err);

@@ -5,7 +5,7 @@ export const addToCart = async (quantity: number, price: number, productId: stri
   try {
     const cartModel = await initCartModel();
 
-    let data = await cartModel.create({
+    const data = await cartModel.create({
       quantity,
       price,
       productId,
@@ -22,7 +22,7 @@ export const cartItemExist = async (productId: string, userId: string) => {
   try {
     const cartModel = await initCartModel();
 
-    let data = await cartModel.findOne({
+    const data = await cartModel.findOne({
       where: {
         productId,
         userId,
@@ -40,7 +40,7 @@ export const listMyCartItem = async (userId: string) => {
     const cartModel = await initCartModel();
     const productModel = await initProductModel();
 
-    let data = await cartModel.findAll({
+    const data = await cartModel.findAll({
       include: [
         {
           model: productModel,
@@ -64,7 +64,7 @@ export const removeFromCart = async (id: string) => {
   try {
     const cartModel = await initCartModel();
 
-    let data = await cartModel.destroy({ where: { cart_id: id } });
+    const data = await cartModel.destroy({ where: { cart_id: id } });
 
     return data;
   } catch (err) {

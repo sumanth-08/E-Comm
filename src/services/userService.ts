@@ -3,7 +3,7 @@ import initAccountModel from "../models/accountModel";
 export const findUserByEmail = async (email: string) => {
   const accountModel = await initAccountModel();
 
-  let userData = await accountModel?.findOne({
+  const userData = await accountModel?.findOne({
     where: {
       email: email,
     },

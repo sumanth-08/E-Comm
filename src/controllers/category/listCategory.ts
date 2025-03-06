@@ -8,7 +8,7 @@ const router = Router();
 
 export default router.get("/", authenticate, async (req: Request, res: Response): Promise<any> => {
   try {
-    let data = await listCategory();
+    const data = await listCategory();
     return send(res, RESPONSE.SUCCESS, data);
   } catch (err) {
     return send(res, RESPONSE.UNKNOWN);

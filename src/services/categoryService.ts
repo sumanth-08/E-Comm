@@ -5,7 +5,7 @@ export const createCategory = async (name: string, description: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.create({
+    const data = await categoryModel.create({
       name,
       description,
     });
@@ -20,7 +20,7 @@ export const updateCategory = async (name: string, description: string, id: stri
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.update(
+    const data = await categoryModel.update(
       {
         name,
         description,
@@ -42,7 +42,7 @@ export const deleteCategory = async (id: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.update(
+    const data = await categoryModel.update(
       {
         is_active: STATE.INACTIVE,
       },
@@ -63,7 +63,7 @@ export const listCategory = async () => {
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.findAll({
+    const data = await categoryModel.findAll({
       where: {
         is_active: STATE.ACTIVE,
       },
@@ -82,7 +82,7 @@ export const categoryFindById = async (id: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.findOne({
+    const data = await categoryModel.findOne({
       where: {
         category_id: id,
       },
@@ -98,7 +98,7 @@ export const categoryFindByName = async (name: string) => {
   try {
     const categoryModel = await initCategoryModel();
 
-    let data = await categoryModel.findOne({
+    const data = await categoryModel.findOne({
       where: {
         name: name,
       },

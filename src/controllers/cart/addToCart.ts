@@ -18,13 +18,13 @@ export default router.post("/", authenticate, validateCartInput, async (req: Req
       return send(res, setResponseMsg(RESPONSE.VALIDATOR, inputError.array()[0].msg));
     }
 
-    let productData = await getProductData(productId);
+    const productData = await getProductData(productId);
     if (!productData) {
       return send(res, setResponseMsg(RESPONSE.NOT_FOUND, "Product"));
     }
     const { price }: any = productData;
 
-    let isItemAlreadyExist = await cartItemExist(productId, userId);
+    const isItemAlreadyExist = await cartItemExist(productId, userId);
     if (isItemAlreadyExist) {
       return send(res, setResponseMsg(RESPONSE.ALREADY_EXIST, "Product in cart"));
     }

@@ -4,7 +4,7 @@ const storage = () => {
   return multer.diskStorage({
     destination: `./public/uploads`,
     filename: (req, file, cb) => {
-      let filename = file.originalname.replace(/\s/g, "").toLowerCase();
+      const filename = file.originalname.replace(/\s/g, "").toLowerCase();
       cb(null, filename);
     },
   });

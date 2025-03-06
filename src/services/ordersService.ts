@@ -7,7 +7,7 @@ export const placeOrder = async (total_amt: number, payment_type: number, userId
   try {
     const ordersModel = await initOrdersMasterModel();
 
-    let data = await ordersModel.create({
+    const data = await ordersModel.create({
       total_amt,
       payment_type,
       userId,
@@ -24,7 +24,7 @@ export const placeOrderItem = async (cart_amt: number, productId: string, orderI
   try {
     const orderItemModel = await initOrdersItemModel();
 
-    let data = await orderItemModel.create({
+    const data = await orderItemModel.create({
       cart_amt,
       productId,
       orderId,
@@ -43,7 +43,7 @@ export const ordersHistory = async (userId: string) => {
     const orderItem = await initOrdersItemModel();
     const productModel = await initProductModel();
 
-    let data = await orderMaster.findAll({
+    const data = await orderMaster.findAll({
       include: {
         model: orderItem,
         as: "orderItemInfo",

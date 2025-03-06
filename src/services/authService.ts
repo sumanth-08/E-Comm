@@ -4,7 +4,7 @@ export const signUp = async (email: string, password: string) => {
   try {
     const accountModel = await initAccountModel();
 
-    let data = await accountModel?.create({ email, password });
+    const data = await accountModel?.create({ email, password });
     return data;
   } catch (err) {
     // console.log(err);
